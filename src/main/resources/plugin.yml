@@ -1,0 +1,35 @@
+name: EnhancedGroups
+version: '${version}'
+main: dev.enhancedgroups.EnhancedGroupsPlugin
+api-version: '26.3'
+depend: [voicechat]
+description: Server-side group management for Simple Voice Chat
+commands:
+  instantgroup:
+    description: Create or join an instant voice group with nearby players
+    usage: /instantgroup [range]
+    permission: enhancedgroups.instantgroup
+  persistentgroup:
+    description: Manage persistent voice groups
+    usage: /persistentgroup <list|add|remove> [arguments]
+    permission: enhancedgroups.persistentgroup
+  autojoingroup:
+    description: Configure personal or global automatic group joining
+    usage: /autojoingroup <set|remove|global> [arguments]
+  forcejoingroup:
+    description: Move a player into your current voice group
+    usage: /forcejoingroup <player>
+    permission: enhancedgroups.forcejoingroup
+permissions:
+  enhancedgroups.admin:
+    default: op
+  enhancedgroups.instantgroup:
+    default: true
+  enhancedgroups.persistentgroup:
+    default: op
+  enhancedgroups.autojoingroup:
+    default: true
+  enhancedgroups.autojoingroup.global:
+    default: op
+  enhancedgroups.forcejoingroup:
+    default: op

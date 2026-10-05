@@ -1,0 +1,6 @@
+prefix: '&8[&aEnhancedGroups&8] &r'
+voicechat_unavailable: '&cVoice chat is not currently connected.'
+player_only: '&cThis command can only be used by a player.'
+no_permission: '&cYou do not have permission to do that.'
+group_not_found: '&cPersistent group not found.'
+usage: '&cUsage: {usage}'

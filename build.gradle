@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.enhancedgroups'
+version = '1.0.0'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(25) }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.purpurmc.org/snapshots' }
+    maven { url = 'https://maven.maxhenkel.de/repository/public' }
+}
+
+dependencies {
+    compileOnly 'org.purpurmc.purpur:purpur-api:26.3.build.2643-experimental'
+    compileOnly 'de.maxhenkel.voicechat:voicechat-api:2.6.0'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 25
+}
+
+processResources {
+    filesMatching('plugin.yml') { expand(version: project.version) }
+}
+
+jar {
+    archiveBaseName = 'EnhancedGroups'
+}

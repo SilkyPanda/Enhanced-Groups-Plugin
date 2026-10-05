@@ -1,0 +1,10 @@
+default_instant_group_range: 128
+instant_group_name: 'Instant Group'
+group_summary: true
+force_group_type: OFF
+permission_defaults:
+  instantgroup: EVERYONE
+  persistentgroup: OPS
+  autojoingroup: EVERYONE
+  autojoingroup_global: OPS
+  forcejoingroup: OPS

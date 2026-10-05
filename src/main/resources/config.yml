@@ -1,10 +1,28 @@
+# Default /instantgroup radius, in blocks. Must be at least 1.
 default_instant_group_range: 128
+
+# Name used when /instantgroup has to create a new group.
 instant_group_name: 'Instant Group'
+
+# Show a voice-group summary to players when they join. Hidden groups are omitted.
 group_summary: true
+
+# Force the group type used for groups created through the Simple Voice Chat GUI.
+# Options: OFF (do not force), NORMAL, OPEN, ISOLATED.
+# This does not override the type explicitly selected by /persistentgroup add.
 force_group_type: OFF
+
+# Default access for each command permission node below.
+# Options: EVERYONE (all players), OPS (server operators), NOONE (disabled by default).
+# Permission plugins can still grant individual nodes. enhancedgroups.admin bypasses these defaults.
 permission_defaults:
+  # Permission: enhancedgroups.instantgroup
   instantgroup: EVERYONE
+  # Permission: enhancedgroups.persistentgroup
   persistentgroup: OPS
+  # Permission: enhancedgroups.autojoingroup
   autojoingroup: EVERYONE
+  # Permission: enhancedgroups.autojoingroup.global
   autojoingroup_global: OPS
+  # Permission: enhancedgroups.forcejoingroup
   forcejoingroup: OPS

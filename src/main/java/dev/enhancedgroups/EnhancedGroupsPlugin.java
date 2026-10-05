@@ -32,7 +32,10 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -62,8 +65,12 @@ public final class EnhancedGroupsPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        saveResource("messages.yml", false);
-        messages = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "messages.yml"));
+        mergeDefaultConfigComments();
+        File messagesFile = new File(getDataFolder(), "messages.yml");
+        if (!messagesFile.exists()) {
+            saveResource("messages.yml", false);
+        }
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
         forcedType = getConfig().getString("force_group_type", "OFF").toUpperCase(Locale.ROOT);
         configurePermissionDefaults();
         loadStores();
@@ -83,6 +90,28 @@ public final class EnhancedGroupsPlugin extends JavaPlugin implements Listener {
         }
         service.registerPlugin(new SvcHook());
         getLogger().info("Enhanced Groups enabled; voice features will be available to players connected to Simple Voice Chat.");
+    }
+
+    /** Adds default comments to an existing config without changing its values or custom comments. */
+    private void mergeDefaultConfigComments() {
+        try (InputStream resource = getResource("config.yml")) {
+            if (resource == null) return;
+            YamlConfiguration defaults = YamlConfiguration.loadConfiguration(
+                    new InputStreamReader(resource, StandardCharsets.UTF_8));
+            boolean changed = false;
+            for (String path : defaults.getKeys(true)) {
+                if (getConfig().contains(path) && getConfig().getComments(path).isEmpty()) {
+                    List<String> comments = defaults.getComments(path);
+                    if (!comments.isEmpty()) {
+                        getConfig().setComments(path, comments);
+                        changed = true;
+                    }
+                }
+            }
+            if (changed) saveConfig();
+        } catch (Exception e) {
+            getLogger().warning("Could not update config.yml comments: " + e.getMessage());
+        }
     }
 
     @Override

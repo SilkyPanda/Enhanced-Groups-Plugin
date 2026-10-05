@@ -13,10 +13,13 @@ Players do not install Enhanced Groups. Players who want to use voice chat still
 
 ## Download and install
 
-1. Download the plugin JAR from the project's GitHub **Releases**. If no release is available, download the `EnhancedGroups-...` artifact from the latest successful **Build plugin** run under **Actions**. GitHub artifacts are ZIP downloads; extract the JAR inside.
-2. Put `EnhancedGroups-1.0.0.jar` in the server's `plugins` folder, alongside the Simple Voice Chat Bukkit plugin JAR.
-3. Start or restart the server.
-4. Configure `plugins/EnhancedGroups/config.yml` and restart the server to apply changes.
+1. Install the **Bukkit server plugin** version of [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat), version **2.6.24 or newer**, for your Minecraft server version. It is a required dependency; the Fabric client mod by itself is not enough on the server.
+2. Download the Enhanced Groups JAR from this project's GitHub **Releases**. If no release is available, download the `EnhancedGroups-...` artifact from the latest successful **Build plugin** run under **Actions** and extract the JAR from the ZIP.
+3. Put both plugin JARs in the server's `plugins` folder. The Simple Voice Chat JAR must be its Bukkit/Paper server plugin build.
+4. Start or restart the server. Enhanced Groups will load after Simple Voice Chat.
+5. Configure `plugins/EnhancedGroups/config.yml` and `messages.yml`, then restart the server to apply changes.
+
+Players do not install Enhanced Groups. Players who want to use voice chat need a compatible Simple Voice Chat client, available for supported mod loaders. Players without the voice chat client can still join the Minecraft server, but cannot use voice chat or voice-group features.
 
 The plugin creates its configuration, messages, saved groups, and auto-join data in `plugins/EnhancedGroups/`.
 
